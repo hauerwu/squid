@@ -421,6 +421,9 @@ HttpStateData::reusableReply(HttpStateData::ReuseDecision &decision)
         } else if (rep->cache_control->hasSMaxAge()) {
             debugs(22, 3, HERE << "Authenticated but server reply Cache-Control:s-maxage");
             mayStore = true;
+        } else if (rep->cache_control->hasMaxAge()){
+            debugs(22, 3, HERE << "Authenticated but server reply Cache-Control:max-age");
+            mayStore = true;
         }
 
         if (!mayStore)
